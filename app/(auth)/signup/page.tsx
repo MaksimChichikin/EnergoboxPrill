@@ -1,0 +1,65 @@
+export const metadata = {
+  title: 'Регистрация',
+  description: 'Page description',
+}
+
+import Link from 'next/link'
+
+export default function SignUp() {
+  return (
+    <section className="relative">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="pt-32 pb-12 md:pt-40 md:pb-20">
+
+          {/* Page header */}
+          <div className="max-w-3xl mx-auto text-center pb-12 md:pb-20">
+            <h1 className="h1">Регистрация.</h1>
+          </div>
+
+          {/* Form */}
+          <div className="max-w-sm mx-auto">
+            <form>
+              <div className="flex flex-wrap -mx-3">
+                <div className="w-full px-3">
+                 
+                </div>
+              </div>
+            </form>
+            
+            <form>
+              <div className="flex flex-wrap -mx-3 mb-4">
+                <div className="w-full px-3">
+                  <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="full-name">ФИО <span className="text-red-600">*</span></label>
+                  <input id="full-name" type="text" className="form-input w-full text-gray-300" placeholder="ФИО" required />
+                </div>
+              </div>
+              
+              <div className="flex flex-wrap -mx-3 mb-4">
+                <div className="w-full px-3">
+                  <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="email">Почта <span className="text-red-600">*</span></label>
+                  <input id="email" type="email" className="form-input w-full text-gray-300" placeholder="Введите вашу почту" required />
+                </div>
+              </div>
+              <div className="flex flex-wrap -mx-3 mb-4">
+                <div className="w-full px-3">
+                  <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="password">Пароль <span className="text-red-600">*</span></label>
+                  <input id="password" type="password" className="form-input w-full text-gray-300" placeholder="Введите пароль (не менее 10 символов)" required />
+                </div>
+              </div>
+             
+              <div className="flex flex-wrap -mx-3 mt-6">
+                <div className="w-full px-3">
+                  <button className="btn text-white bg-purple-600 hover:bg-purple-700 w-full">Регистрация</button>
+                </div>
+              </div>
+            </form>
+            <div className="text-gray-400 text-center mt-6">
+              У вас уже есть аккаунт? <Link href="/signin" className="text-purple-600 hover:text-gray-200 transition duration-150 ease-in-out">Войдите</Link>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  )
+}
