@@ -1,10 +1,9 @@
-'use client'; // Убедитесь, что эта строка добавлена первой
-
+'use client'; 
 import React, { useEffect, useState } from 'react';
-import { Search, Plus, Edit, Trash } from 'react-feather'; // Импортируем иконки
-import { useRouter } from 'next/navigation'; // Импортируем useRouter для маршрутизации
+import { Search, Plus, Edit, Trash, MessageSquare } from 'react-feather'; 
+import { useRouter } from 'next/navigation'; 
 
-// Определение типа User
+
 interface User {
   id: number;
   fullName: string;
@@ -13,7 +12,6 @@ interface User {
   roleId: number;
 }
 
-// Функция для преобразования roleId в удобочитаемую строку
 const getRoleName = (roleId: number): string => {
   switch (roleId) {
     case 1:
@@ -32,10 +30,10 @@ const AdminPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const router = useRouter(); // Получаем объект маршрутизации
+  const router = useRouter(); 
 
   useEffect(() => {
-    // Функция для получения данных из API
+   
     const fetchUsers = async () => {
       try {
         const response = await fetch('http://localhost:5080/api/Users');
@@ -60,7 +58,7 @@ const AdminPage: React.FC = () => {
   };
 
   const handleDeleteUser = async (userId: number) => {
-    console.log(`Attempting to delete user with ID: ${userId}`); // Добавьте логирование
+    console.log(`Attempting to delete user with ID: ${userId}`); 
     setError(null);
 
     try {
@@ -68,26 +66,32 @@ const AdminPage: React.FC = () => {
         method: 'DELETE',
       });
 
-      console.log(`Response status: ${response.status}`); // Логирование статуса ответа
+      console.log(`Response status: ${response.status}`);
 
       if (!response.ok) {
         setError('Ошибка при удалении пользователя');
-        console.error(`Error deleting user with ID: ${userId}`); // Логирование ошибки
+        console.error(`Error deleting user with ID: ${userId}`); 
         return;
       }
 
-      // Обновляем список пользователей после успешного удаления
+      
       setUsers(users.filter(user => user.id !== userId));
     } catch (error) {
       setError('Произошла ошибка при удалении пользователя');
-      console.error(`Exception while deleting user with ID: ${userId}`, error); // Логирование исключения
+      console.error(`Exception while deleting user with ID: ${userId}`, error); 
     }
   };
 
   const handleAddUserClick = () => {
-    // Переход на страницу создания пользователя при нажатии на кнопку
+ 
     router.push('/create-user');
   };
+
+  const handleViewMessages = () => {
+   
+    router.push('/history-chat');
+  };
+ 
 
   const filteredUsers = users.filter(user =>
     user.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -113,15 +117,6 @@ const AdminPage: React.FC = () => {
             <h1 className="h1">Административная страница</h1>
           </div>
           <div className="max-w-lg mx-auto">
-            {/* Кнопка добавить пользователя */}
-            <div className="mb-6">
-              <button
-                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-                onClick={handleAddUserClick} // Обработчик нажатия на кнопку
-              >
-                <Plus className="w-5 h-5 inline-block mr-1" /> Добавить пользователя
-              </button>
-            </div>
             <div className="mb-6 relative">
               <input
                 type="text"
@@ -131,9 +126,28 @@ const AdminPage: React.FC = () => {
                 className="w-full p-3 pl-10 border border-gray-700 rounded-sm bg-gray-800 text-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500"
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                {/* Значок поиска (иконка из Feather Icons) */}
+                
                 <Search className="w-5 h-5 text-gray-400" />
               </div>
+            </div>
+           
+            <div className="mb-6 flex justify-between">
+            <div className="mb-6 flex justify-between">
+              <button
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                onClick={handleAddUserClick}
+              >
+                <Plus className="w-5 h-5 inline-block mr-1" /> Добавить пользователя
+              </button>
+              
+              <div className="w-4" />
+              <button
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+                onClick={handleViewMessages}
+              >
+                <MessageSquare  className="w-5 h-5 inline-block mr-1" /> Просмотреть историю сообщений
+              </button>
+            </div>
             </div>
             <div>
               <h2 className="h2 mb-6">Список пользователей</h2>

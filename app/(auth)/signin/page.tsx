@@ -1,14 +1,14 @@
-'use client'; // Убедитесь, что эта строка добавлена первой
+'use client'; 
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
 interface User {
-  id: number; // Добавлено поле id
+  id: number;
   email: string;
   password: string;
-  roleId: number; // Добавлено поле roleId
+  roleId: number; 
 }
 
 export default function SignIn() {

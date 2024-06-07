@@ -1,4 +1,4 @@
-'use client'; // Убедитесь, что эта строка добавлена первой
+'use client'; 
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -87,7 +87,7 @@ const UserPage: React.FC = () => {
               <div className="text-left">
                 <p><strong>ФИО:</strong> {user.fullName}</p>
                 <p><strong>Email:</strong> {user.email}</p>
-                <p><strong>Роль:</strong> {getRoleName(user.roleId)}</p>
+              
               </div>
             )}
           </div>
@@ -98,7 +98,7 @@ const UserPage: React.FC = () => {
                 <li key={worker.id} className="border border-gray-700 rounded-sm p-4">
                   <span className="text-sm text-gray-300">ФИО: {worker.fullName}</span><br />
                   <span className="text-sm text-gray-400">Email: {worker.email}</span><br />
-                  <span className="text-sm text-gray-400">Роль: {getRoleName(worker.roleId)}</span><br />
+                  
                   <button 
                     className="btn text-white bg-purple-600 hover:bg-purple-700 mt-4"
                     onClick={() => handleChat(worker.id)}
